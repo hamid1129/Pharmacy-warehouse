@@ -545,9 +545,7 @@ private void mnu_aboutUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     ap.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     ap.setVisible(true);
 }//GEN-LAST:event_mnu_aboutUsActionPerformed
-    /**
-     * @param args the command line arguments
-     */
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_addRow;
     private javax.swing.JButton btn_request;
