@@ -462,7 +462,9 @@ private void btn_addRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         if (!temp.equals(name)) {
             //insert new item to database
             insertDrug.InsertToTable(name, category, total);
-            if (cmb_list.getItemCount() > 0) {
+
+        }
+                    if (cmb_list.getItemCount() > 0) {
                 cmb_list.removeAllItems();
             }
 
@@ -470,8 +472,6 @@ private void btn_addRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 cmb_list.addItem(list.get(i));
 
             }
-        }
-
         //clear current textfield values
         txt_name.setText("");
         txt_category.setText("");
