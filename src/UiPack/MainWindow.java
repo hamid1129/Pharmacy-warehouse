@@ -109,6 +109,12 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        txt_total.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_totalKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -116,10 +122,10 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(txt_total, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(txt_category, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(txt_name, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(txt_number, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))
+                    .addComponent(txt_total, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                    .addComponent(txt_category, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                    .addComponent(txt_name, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                    .addComponent(txt_number, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
@@ -164,7 +170,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(168, Short.MAX_VALUE)
+                .addContainerGap(165, Short.MAX_VALUE)
                 .addComponent(btn_addRow)
                 .addContainerGap())
         );
@@ -294,6 +300,11 @@ public class MainWindow extends javax.swing.JFrame {
                 txt_req_boxActionPerformed(evt);
             }
         });
+        txt_req_box.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_req_boxKeyPressed(evt);
+            }
+        });
 
         jLabel6.setText("تعداد جعبه مورد نیاز");
 
@@ -339,14 +350,10 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(163, 163, 163))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jPanel8, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(163, 163, 163))))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel8, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(163, 163, 163))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -464,14 +471,14 @@ private void btn_addRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             insertDrug.InsertToTable(name, category, total);
 
         }
-                    if (cmb_list.getItemCount() > 0) {
-                cmb_list.removeAllItems();
-            }
+        if (cmb_list.getItemCount() > 0) {
+            cmb_list.removeAllItems();
+        }
 
-            for (int i = 0; i < list.size(); i++) {
-                cmb_list.addItem(list.get(i));
+        for (int i = 0; i < list.size(); i++) {
+            cmb_list.addItem(list.get(i));
 
-            }
+        }
         //clear current textfield values
         txt_name.setText("");
         txt_category.setText("");
@@ -521,8 +528,9 @@ private void btn_requestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 
             chN = new CheckFreeNumber(numberExist);
             freeBoxes = chN.getFreeBoxes();
-            if (freeBoxes ==10)
+            if (freeBoxes == 10) {
                 lbl_freeboxes.setForeground(Color.red);
+            }
             lbl_freeboxes.setText(Integer.toString(freeBoxes));
 
         } catch (SQLException ex) {
@@ -545,6 +553,30 @@ private void mnu_aboutUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     ap.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     ap.setVisible(true);
 }//GEN-LAST:event_mnu_aboutUsActionPerformed
+
+private void txt_req_boxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_req_boxKeyPressed
+    if (evt.getKeyCode() >= 48 && evt.getKeyChar() <= 57) {
+        txt_req_box.setEditable(true);
+        System.out.println();
+    } else if (evt.getKeyCode() == 8 || evt.getKeyCode()==127) {
+        txt_req_box.setEditable(true);
+    } else {
+        txt_req_box.setEditable(false);
+        System.out.println("Enabled");
+    }
+}//GEN-LAST:event_txt_req_boxKeyPressed
+
+private void txt_totalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_totalKeyPressed
+    if (evt.getKeyCode() >= 48 && evt.getKeyChar() <= 57) {
+        txt_total.setEditable(true);
+        System.out.println();
+    } else if (evt.getKeyCode() == 8 || evt.getKeyCode()==127) {
+        txt_total.setEditable(true);
+    } else {
+        txt_total.setEditable(false);
+        System.out.println("Enabled");
+    }// TODO add your handling code here:
+}//GEN-LAST:event_txt_totalKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_addRow;
