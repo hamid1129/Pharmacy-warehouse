@@ -295,6 +295,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         txt_req_box.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txt_req_box.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_req_boxMouseClicked(evt);
+            }
+        });
         txt_req_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_req_boxActionPerformed(evt);
@@ -577,6 +582,11 @@ private void txt_totalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         System.out.println("Enabled");
     }// TODO add your handling code here:
 }//GEN-LAST:event_txt_totalKeyPressed
+
+private void txt_req_boxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_req_boxMouseClicked
+    txt_req_box.setEditable(true);
+    // TODO add your handling code here:
+}//GEN-LAST:event_txt_req_boxMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_addRow;
