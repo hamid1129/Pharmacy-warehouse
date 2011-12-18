@@ -26,7 +26,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mnu_aboutUs">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#x62f;&#x631;&#x628;&#x627;&#x631;&#x647; &#x645;&#x627; ...."/>
+                <Property name="text" type="java.lang.String" value="&#x62f;&#x631;&#x628;&#x627;&#x631;&#x647;  ...."/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnu_aboutUsActionPerformed"/>

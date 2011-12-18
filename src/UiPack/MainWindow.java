@@ -398,7 +398,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jMenu2.setText("راهنمایی");
 
-        mnu_aboutUs.setText("درباره ما ....");
+        mnu_aboutUs.setText("درباره  ....");
         mnu_aboutUs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnu_aboutUsActionPerformed(evt);

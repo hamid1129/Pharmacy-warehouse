@@ -5,6 +5,7 @@
  */
 package UiPack;
 
+import java.awt.Color;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
@@ -178,6 +179,11 @@ public class AboutPage extends javax.swing.JFrame {
                 jLabel11MouseClicked(evt);
             }
         });
+        jLabel11.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jLabel11MouseMoved(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -226,18 +232,21 @@ public class AboutPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+    try {
+        Desktop ds = Desktop.getDesktop();
         try {
-            Desktop ds = Desktop.getDesktop();
-            try {
-                ds.browse(new URI("https://github.com/hamid1129/Pharmacy-warehouse"));
-            } catch (URISyntaxException ex) {
-                Logger.getLogger(AboutPage.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch (IOException ex) {
+            ds.browse(new URI("https://github.com/hamid1129/Pharmacy-warehouse"));
+        } catch (URISyntaxException ex) {
             Logger.getLogger(AboutPage.class.getName()).log(Level.SEVERE, null, ex);
         }
+    } catch (IOException ex) {
+        Logger.getLogger(AboutPage.class.getName()).log(Level.SEVERE, null, ex);
+    }
 
 }//GEN-LAST:event_jLabel11MouseClicked
+
+private void jLabel11MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseMoved
+}//GEN-LAST:event_jLabel11MouseMoved
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
