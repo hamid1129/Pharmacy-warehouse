@@ -22,7 +22,7 @@ import logic.CheckFreeNumber;
  * @author hamid
  */
 public class MainWindow extends javax.swing.JFrame {
-
+    
     private String selectedDrugName;
     private int numberExist;
     private int freeBoxes;
@@ -39,7 +39,7 @@ public class MainWindow extends javax.swing.JFrame {
         insertDrug = new InsertDrug();
         rc = new RetrieveCount();
         txt_number.setText(rc.getAllRowCount());
-
+        
     }
 
     /** This method is called from within the constructor to
@@ -109,6 +109,11 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        txt_total.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_totalFocusLost(evt);
+            }
+        });
         txt_total.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_totalKeyPressed(evt);
@@ -305,6 +310,11 @@ public class MainWindow extends javax.swing.JFrame {
                 txt_req_boxActionPerformed(evt);
             }
         });
+        txt_req_box.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_req_boxFocusLost(evt);
+            }
+        });
         txt_req_box.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_req_boxKeyPressed(evt);
@@ -426,11 +436,11 @@ private void cmb_listActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         selectedDrugName = cmb_list.getSelectedItem().toString();
         numberExist = rc.getDrugCount(selectedDrugName);
         lbl_count.setText(Integer.toString(numberExist));
-
+        
         chN = new CheckFreeNumber(numberExist);
         freeBoxes = chN.getFreeBoxes();
         lbl_freeboxes.setText(Integer.toString(freeBoxes));
-
+        
         if (numberExist < 10) {
             lbl_freeboxes.setForeground(Color.red);
             JOptionPane.showMessageDialog(rootPane, "موجودی داروی \""
@@ -439,11 +449,11 @@ private void cmb_listActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         } else {
             lbl_freeboxes.setForeground(Color.BLACK);
         }
-
+        
     }
-
+    
 }//GEN-LAST:event_cmb_listActionPerformed
-
+    
 private void btn_updateCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateCBActionPerformed
     if (cmb_list.getItemCount() > 0) {
         cmb_list.removeAllItems();
@@ -453,7 +463,7 @@ private void btn_updateCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         cmb_list.addItem(list.get(i));
     }
 }//GEN-LAST:event_btn_updateCBActionPerformed
-
+    
 private void btn_addRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addRowActionPerformed
     try {
         String temp = "";
@@ -463,7 +473,7 @@ private void btn_addRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         String name = txt_name.getText();
         String category = txt_category.getText();
         int total = Integer.parseInt(txt_total.getText());
-
+        
         for (int i = 0; i < list.size(); i++) {
             if (name.equals(list.get(i))) {
                 temp = name;
@@ -474,15 +484,15 @@ private void btn_addRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         if (!temp.equals(name)) {
             //insert new item to database
             insertDrug.InsertToTable(name, category, total);
-
+            
         }
         if (cmb_list.getItemCount() > 0) {
             cmb_list.removeAllItems();
         }
-
+        
         for (int i = 0; i < list.size(); i++) {
             cmb_list.addItem(list.get(i));
-
+            
         }
         //clear current textfield values
         txt_name.setText("");
@@ -497,97 +507,106 @@ private void btn_addRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     } catch (NumberFormatException ex) {
         JOptionPane.showMessageDialog(rootPane,
                 "محتوای یکی از سطرها صحیح نمی‌باشد", "بروز خطا", 1);
-
+        
     }
 }//GEN-LAST:event_btn_addRowActionPerformed
-
+    
 private void txt_categoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_categoryActionPerformed
 // TODO add your handling code here:
 }//GEN-LAST:event_txt_categoryActionPerformed
-
+    
 private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
     System.exit(0);
 }//GEN-LAST:event_jMenuItem1ActionPerformed
-
+    
 private void btn_requestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_requestActionPerformed
     //  boolean check = false;
     request = Integer.parseInt(txt_req_box.getText());
-
-
-
+    
+    
+    
     if (request > freeBoxes) {
         JOptionPane.showMessageDialog(rootPane, "میزان بسته درخواستی از ح"
                 + "د مجاز انبار بیشتر می‌باشد");
     } else {
-
+        
         try {
             updateNumber = new UpdateNumBoxes();
             updateNumber.SetNewCount(selectedDrugName, numberExist, request);
             updateNumber.UpdateRow();
-
-
+            
+            
             txt_req_box.selectAll();
-
+            
             numberExist = rc.getDrugCount(selectedDrugName);
             lbl_count.setText(Integer.toString(numberExist));
-
+            
             chN = new CheckFreeNumber(numberExist);
             freeBoxes = chN.getFreeBoxes();
             if (freeBoxes == 10) {
                 lbl_freeboxes.setForeground(Color.red);
             }
             lbl_freeboxes.setText(Integer.toString(freeBoxes));
-
+            
         } catch (SQLException ex) {
             Logger.getLogger(MainWindow.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
-
-
-
-
+        
+        
+        
+        
     }
 }//GEN-LAST:event_btn_requestActionPerformed
-
+    
 private void txt_req_boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_req_boxActionPerformed
 // TODO add your handling code here:
 }//GEN-LAST:event_txt_req_boxActionPerformed
-
+    
 private void mnu_aboutUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_aboutUsActionPerformed
     AboutPage ap = new AboutPage();
     ap.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     ap.setVisible(true);
 }//GEN-LAST:event_mnu_aboutUsActionPerformed
-
+    
 private void txt_req_boxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_req_boxKeyPressed
     if (evt.getKeyCode() >= 48 && evt.getKeyChar() <= 57) {
         txt_req_box.setEditable(true);
         System.out.println();
-    } else if (evt.getKeyCode() == 8 || evt.getKeyCode()==127) {
+    } else if (evt.getKeyCode() == 8 || evt.getKeyCode() == 127) {
         txt_req_box.setEditable(true);
     } else {
         txt_req_box.setEditable(false);
         System.out.println("Enabled");
     }
 }//GEN-LAST:event_txt_req_boxKeyPressed
-
+    
 private void txt_totalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_totalKeyPressed
     if (evt.getKeyCode() >= 48 && evt.getKeyChar() <= 57) {
         txt_total.setEditable(true);
         System.out.println();
-    } else if (evt.getKeyCode() == 8 || evt.getKeyCode()==127) {
+    } else if (evt.getKeyCode() == 8 || evt.getKeyCode() == 127) {
         txt_total.setEditable(true);
     } else {
         txt_total.setEditable(false);
         System.out.println("Enabled");
     }// TODO add your handling code here:
 }//GEN-LAST:event_txt_totalKeyPressed
-
+    
 private void txt_req_boxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_req_boxMouseClicked
     txt_req_box.setEditable(true);
     // TODO add your handling code here:
 }//GEN-LAST:event_txt_req_boxMouseClicked
-
+    
+private void txt_totalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_totalFocusLost
+    txt_total.setEditable(true);
+    // TODO add your handling code here:
+}//GEN-LAST:event_txt_totalFocusLost
+    
+private void txt_req_boxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_req_boxFocusLost
+    
+    txt_req_box.setEditable(true);
+}//GEN-LAST:event_txt_req_boxFocusLost
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_addRow;
     private javax.swing.JButton btn_request;
